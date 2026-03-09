@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.google.cloud.tools.jib' version '3.4.0'
+}
+
+group = 'com.example' // 본인의 그룹명으로 수정 가능
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+jib {
+    from {
+        image = 'eclipse-temurin:17-jre'
+    }
+    to {
+        // 나중에 Azure DevOps에서 넘겨줄 이미지 주소
+        image = 'acrs1topspoc.azurecr.io/my-app' 
+        tags = ['latest']
+    }
+    container {
+        mainClass = 'com.example.demo.DemoApplication'
+        ports = ['8080']
+    }
+}
