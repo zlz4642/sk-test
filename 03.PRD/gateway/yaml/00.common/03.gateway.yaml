@@ -6,16 +6,6 @@ metadata:
 spec:
   gatewayClassName: sg
   listeners:
-    - name: https
-      port: 443
-      protocol: HTTPS
-      tls:
-        mode: Terminate
-        certificateRefs:
-        - name: sg-tls-sec
-      allowedRoutes:
-        namespaces:
-          from: All
     - name: http
       protocol: HTTP
       port: 80
