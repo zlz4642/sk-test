@@ -12,7 +12,7 @@ spec:
         type: LoadBalancer
         annotations:
           # Azure 고정 IP의 이름을 지정 (이게 없으면 새 IP가 생성됨)
-          service.beta.kubernetes.io/azure-pip-name: "${GATEWAY_PIP}"
+          service.beta.kubernetes.io/azure-pip-name: "__GATEWAY_PIP__"
           # 만약 IP가 노드 리소스 그룹이 아닌 다른 곳에 있다면 아래 추가
           service.beta.kubernetes.io/azure-load-balancer-resource-group: "MC_rg-s1tops-poc_aks-test_koreacentral"  # 다른 리소스 그룹이면 명칭 지정
           service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
