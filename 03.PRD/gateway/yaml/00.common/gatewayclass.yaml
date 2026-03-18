@@ -1,0 +1,12 @@
+# GateWAY API의 Proxy 생성
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+    name: sg # Gateway 리소스가 참조할 이름
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: sg-config
+    namespace: skix-gateway
