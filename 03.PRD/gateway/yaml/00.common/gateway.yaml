@@ -1,0 +1,31 @@
+# GateWAY API에 진입점 구성
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: sg
+  namespace: skix-gateway
+  annotations:
+    # Azure 고정 IP의 이름을 지정 (이게 없으면 새 IP가 생성됨)
+    service.beta.kubernetes.io/azure-pip-name: "pip_skix_dev_krc_aks"
+spec:
+  gatewayClassName: sg # 위에서 만든 GatewayClass 이름과 일치해야 함
+  listeners:
+    - name: https
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate # Gateway에서 복호화 수행
+        certificateRefs:
+        - name: sg-tls-sec # 생성한 Secret 이름
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
+  #addresses:
+  #  - type: IPAddress
+  #    value: "20.249.26.207" # 여기에 미리 예약한 공용 IP를 입력합니다.
