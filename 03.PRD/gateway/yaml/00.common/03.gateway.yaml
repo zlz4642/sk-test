@@ -1,20 +1,18 @@
-# GateWAY API에 진입점 구성
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: sg
   namespace: skix-gateway
-  annotations:
 spec:
-  gatewayClassName: sg # 위에서 만든 GatewayClass 이름과 일치해야 함
+  gatewayClassName: sg
   listeners:
     - name: https
       port: 443
       protocol: HTTPS
       tls:
-        mode: Terminate # Gateway에서 복호화 수행
+        mode: Terminate
         certificateRefs:
-        - name: sg-tls-sec # 생성한 Secret 이름
+        - name: sg-tls-sec
       allowedRoutes:
         namespaces:
           from: All
