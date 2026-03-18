@@ -5,8 +5,6 @@ metadata:
   name: sg
   namespace: skix-gateway
   annotations:
-    # Azure 고정 IP의 이름을 지정 (이게 없으면 새 IP가 생성됨)
-    service.beta.kubernetes.io/azure-pip-name: "__GATEWAY_PIP__"
 spec:
   gatewayClassName: sg # 위에서 만든 GatewayClass 이름과 일치해야 함
   listeners:
